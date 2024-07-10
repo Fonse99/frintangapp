@@ -1,0 +1,7 @@
+{
+  "name": "FritangApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
