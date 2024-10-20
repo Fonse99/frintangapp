@@ -1,0 +1,155 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button fill="clear" (click)="goBack()">
+        <ion-icon name="chevron-back" />
+        Volver
+      </ion-button>
+    </ion-buttons>
+
+    @if (pageTitle) {
+    <ion-title class="ion-text-center"> {{ pageTitle }} </ion-title>
+    }
+    <!-- if there aren't menu items, menu shouldn't be redered -->
+    @if (menuItems.length >0) {
+    <ion-buttons slot="end">
+      <ion-menu-button />
+    </ion-buttons>
+    } @else {
+    <ion-buttons slot="end">
+      <ion-button size="large">
+        <ion-icon name="person-circle" size="large" slot="icon-only">
+        </ion-icon>
+      </ion-button>
+    </ion-buttons>
+    }
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <div class="ion-margin">
+    <!-- This contain whole component -->
+    <ion-grid>
+      <ion-row>
+        <ion-col size="3" sizeXs="6" sizeSm="3">
+          <ion-select label="Filtro 1" labelPlacement="floating" fill="outline">
+            <ion-select-option>Valor</ion-select-option>
+          </ion-select>
+        </ion-col>
+        <ion-col size="3" sizeXs="6" sizeSm="3" class="">
+          <ion-select label="Filtro 1" labelPlacement="floating" fill="outline">
+            <ion-select-option>Valor</ion-select-option>
+          </ion-select>
+        </ion-col>
+      </ion-row>
+
+      <ion-item>
+        <strong>{{'Lista de Órdenes ' | uppercase}} </strong>
+      </ion-item>
+
+      <!-- This row is for tablet views -->
+      <ion-row>
+        <ion-col size="12">
+          <ion-list>
+            <ion-list-header lines="full"> </ion-list-header>
+
+            <ion-item
+              [button]="true"
+              *ngFor="let i of [1,2,3,4,5]; index as idx"
+              (touchstart)="onTouchStart($event, idx)"
+              (touchend)="onTouchEnd($event, idx)"
+            >
+              <ion-thumbnail slot="start" class="smooth-r-b">
+                <img
+                  src="https://www.inc.gob.ni/wp-content/uploads/2023/04/01Baho.jpg"
+                  alt=""
+                />
+              </ion-thumbnail>
+              <ion-label class="ion-text-nowrap">
+                <h1>Orden: <strong>{{'#AB' + idx}}</strong></h1>
+                <h1>Tacos al pastor</h1>
+                <p><strong> {{25 | currency: 'C$ '}} </strong></p>
+                <!-- <h2>Algo corto aquí</h2> -->
+                <span>
+                  <ion-badge color="success" style="color: white">
+                    <ion-icon name="checkmark-circle" />
+                    Completo</ion-badge
+                  >
+                </span>
+              </ion-label>
+              <ion-note slot="start"> </ion-note>
+
+              <ion-button
+                fill="clear"
+                size="large"
+                (click)="openMenuPopover($event, idx)"
+              >
+                <ion-icon name="ellipsis-horizontal" />
+              </ion-button>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-toolbar color="primary"> </ion-toolbar>
+</ion-footer>
+
+<ion-fab class="ion-margin" horizontal="end" vertical="bottom" slot="fixed">
+  <ion-fab-button color="secondary" size="large">
+    <ion-icon name="add"
+  /></ion-fab-button>
+
+  <ion-fab-list side="top">
+    <ion-fab-button color="primary" (click)="addNewOrder()">
+      <ion-icon name="receipt" />
+    </ion-fab-button>
+  </ion-fab-list>
+</ion-fab>
+
+<!-- Menú de cada fila -->
+<ion-popover
+  #popoverMenu
+  [isOpen]="isMenuOpen"
+  [dismissOnSelect]="true"
+  (didDismiss)="isMenuOpen = false"
+>
+  <ng-template>
+    <ion-header class="ion-no-border">
+      <ion-toolbar>
+        <ion-title>
+          Orden <strong>#AB{{popoverMenu.componentProps?.['data']}}</strong>
+        </ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-item [button]="true" [detail]="false">Option 1</ion-item>
+        <ion-item [button]="true" [detail]="false">Option 2</ion-item>
+        <ion-item [button]="true" id="nested-trigger">More options...</ion-item>
+
+        <ion-popover
+          trigger="nested-trigger"
+          [dismissOnSelect]="true"
+          side="bottom"
+        >
+          <ng-template>
+            <ion-content>
+              <ion-list>
+                <ion-item
+                  [button]="true"
+                  [detail]="false"
+                  (click)="doSomethin(popoverMenu.componentProps)"
+                  >Nested option</ion-item
+                >
+              </ion-list>
+            </ion-content>
+          </ng-template>
+        </ion-popover>
+      </ion-list>
+    </ion-content>
+  </ng-template>
+</ion-popover>
+

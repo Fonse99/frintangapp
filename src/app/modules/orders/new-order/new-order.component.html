@@ -1,0 +1,161 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons>
+      <ion-button (click)="goBack()">
+        <ion-icon name="chevron-back" /> volver</ion-button
+      >
+    </ion-buttons>
+    <h1 slot="end" class="ion-margin-end">Nueva Orden</h1>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item class="order-header" slot="fixed" lines="full">
+    <ion-label slot="start">
+      <p>Descripción</p>
+    </ion-label>
+
+    <ion-label slot="end">
+      <p>Cantidad</p>
+    </ion-label>
+  </ion-item>
+  <ion-grid>
+    <ion-row>
+      <ion-col sizeXs="12" sizeSm="7">
+        <ion-list class="order-list">
+          <ion-item *ngFor="let i of orderList; index as idx">
+            <ion-label>
+              <h2>Nacatamal {{ idx }}</h2>
+            </ion-label>
+
+            <ion-buttons>
+              <ion-button color="danger">
+                <ion-icon name="remove" slot="icon-only" />
+              </ion-button>
+              <ion-badge class="ion-margin-start ion-margin-end">10</ion-badge>
+              <ion-button color="primary">
+                <ion-icon name="add" slot="icon-only" />
+              </ion-button>
+            </ion-buttons>
+          </ion-item> </ion-list
+      ></ion-col>
+      <ion-col class="order-summary-ticket" sizeSm="5"> hola mundo </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-footer>
+  <ion-item class="order-summary" lines="none">
+    <ion-label slot="start">
+      <ion-icon size="large" name="person-circle"></ion-icon>
+      <p>Brandon. F</p>
+    </ion-label>
+    <ion-label slot="end">
+      <!-- <h2>Total</h2> -->
+      <p>Productos: {{ 4 }} Unds</p>
+      <p>
+        Prod.: <strong>{{ 4 }} Unds</strong>
+      </p>
+      <p>
+        Total:
+        <strong>{{ 4850 | currency : "C$ " }} </strong>
+      </p>
+    </ion-label>
+  </ion-item>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button id="bill-button" size="large">
+        <ion-icon name="fast-food" slot="start"></ion-icon>
+        Menú
+        <ion-icon name="chevron-up"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button size="large">
+        <ion-icon name="checkmark"></ion-icon>
+        Ordenar
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
+
+<ion-modal
+  #addOrderModal
+  trigger="bill-button"
+  [initialBreakpoint]="1"
+  [breakpoints]="[0, 0.25, 0.5, 0.75, 1.0]"
+>
+  <ng-template class="ion-margin">
+    <ion-header class="ion-no-border">
+      <ion-toolbar color="primary">
+        <ion-button
+          color="light"
+          fill="clear"
+          (click)="addOrderModal.dismiss()"
+        >
+          <ion-icon name="chevron-back" slot="start" /> Cerrar
+        </ion-button>
+
+        <ion-title slot="end">Menu</ion-title>
+      </ion-toolbar>
+
+      <ion-toolbar>
+        <ion-searchbar
+          placeholder="Buscar platillo..."
+          clearIcon="close"
+        ></ion-searchbar>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+      <ion-list class="ion-margin">
+        <ion-item [button]="true" *ngFor="let i of menuList">
+          <ion-thumbnail slot="start" class="smooth-r-b">
+            <img
+              src="https://www.inc.gob.ni/wp-content/uploads/2023/04/01Baho.jpg"
+              alt=""
+            />
+          </ion-thumbnail>
+          <ion-label>
+            <h1>Nacatamal</h1>
+            <p><strong>C$ 25.00</strong></p>
+            <ion-badge>x10 unds</ion-badge>
+          </ion-label>
+
+          <ion-buttons>
+            <!-- <ion-button fill="solid" shape="round" color="danger">
+                <ion-icon slot="icon-only" name="remove"></ion-icon>
+              </ion-button> -->
+            <ion-button shape="round" color="secondary">
+              <ion-icon slot="icon-only" name="add"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+          <!-- <ion-note> </ion-note> -->
+        </ion-item>
+      </ion-list>
+    </ion-content>
+
+    <ion-footer>
+      <ion-toolbar>
+        <ion-segment [formControl]="segment">
+          <ion-segment-button value="food">
+            <ion-icon name="pizza-outline"></ion-icon>
+            <ion-label>Comida</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="drink">
+            <ion-icon name="cafe-outline"></ion-icon>
+            <ion-label>Bebida</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="dessert">
+            <ion-icon name="ice-cream-outline"></ion-icon>
+            <ion-label>Postre</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="licor">
+            <ion-icon name="beer-outline"></ion-icon>
+            <ion-label>Licor</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-toolbar>
+    </ion-footer>
+  </ng-template>
+</ion-modal>

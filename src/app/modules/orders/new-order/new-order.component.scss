@@ -1,0 +1,50 @@
+ion-thumbnail {
+  --size: 120px;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+@media (max-width: 576px) {
+  ion-thumbnail {
+    --size: 50px;
+  }
+
+  h1 {
+    font-size: medium;
+  }
+
+  .order-header[slot="fixed"] {
+    display: block;
+    top: 0px;
+    width: 100vw;
+  }
+
+  .order-list {
+    margin-top: 30px;
+  }
+
+  .order-summary {
+    display: block;
+    bottom: 0px;
+    left: 0px;
+    width: 100vw;
+  }
+
+  .order-summary-ticket {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .order-list {
+    width: 100%;
+  }
+
+  .order-summary,
+  .order-header {
+    display: none;
+  }
+}

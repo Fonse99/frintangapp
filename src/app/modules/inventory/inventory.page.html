@@ -1,0 +1,46 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>inventory</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list>
+    <ion-item *ngFor="let i of [1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,]">
+      <ion-avatar slot="start">
+        <img
+          height="400px"
+          width="400px"
+          src="https://static.vecteezy.com/system/resources/previews/026/773/883/non_2x/enchiladas-with-ai-generated-free-png.png"
+          alt="Tacos"
+        />
+      </ion-avatar>
+
+      <ion-label>
+        <p><strong>Nombre</strong></p>
+        <ion-text>Tacos</ion-text>
+      </ion-label>
+
+      <ion-label>
+        <p><strong>Stock</strong></p>
+        <ion-text>1</ion-text>
+      </ion-label>
+
+      <ion-label>
+        <p><strong>Precio</strong></p>
+        <ion-text>{{50.00 | currency: "C$ "}}</ion-text>
+      </ion-label>
+
+      <ion-button fill="clear">
+        <ion-icon name="chevron-forward"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+  <ion-fab slot="fixed" horizontal="end" vertical="bottom">
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+<ion-footer> <ion-toolbar></ion-toolbar></ion-footer>
