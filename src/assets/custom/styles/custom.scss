@@ -6,3 +6,23 @@
   border-radius: 5px;
   --border-radius: 5px;
 }
+
+.no-margin {
+  margin: 0px;
+}
+
+.no-margin-end {
+  margin-inline-end: 0px;
+}
+
+.no-margin-start {
+  margin-inline-start: 0px;
+}
+
+.no-padding {
+  padding: 0px;
+}
+
+.scanner-active {
+  opacity: 0;
+}

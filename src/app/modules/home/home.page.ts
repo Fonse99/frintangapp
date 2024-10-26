@@ -37,7 +37,7 @@ const routing = [
   },
   {
     title: 'Reportes',
-    route: '/pos',
+    route: '/billing',
     description: `Lorem ipsum dolor sit amet consectetur, adipisicing elit.
               Reprehenderit minus dolores sapiente cum aperiam et iste est eum
               accusantium sequi quo, voluptate neque! Eligendi!`,

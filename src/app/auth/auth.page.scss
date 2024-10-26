@@ -1,0 +1,52 @@
+.login,
+.login-container {
+  height: 100vh;
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+  width: 50vw;
+  background-color: var(--ion-color-primary-contrast);
+  padding: 16px;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-container {
+  display: flex;
+  background-color: var(--ion-color-primary);
+}
+
+.illustration {
+  width: 50vw;
+}
+
+// Tablet layout
+@media (min-width: 577px) and (max-width: 800px) {
+  .login-container {
+    justify-content: center;
+    align-items: center;
+  }
+
+  .login {
+    height: 80vh;
+    width: 80vw;
+  }
+
+  .illustration {
+    display: none;
+  }
+}
+
+// Móvil layout
+@media (max-width: 576px) {
+  .login {
+    background-color: var(--ion-color-primary-contrast);
+    width: 100vw;
+  }
+
+  .illustration {
+    display: none;
+  }
+}

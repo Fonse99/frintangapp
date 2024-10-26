@@ -12,7 +12,6 @@ $RECYCLE.BIN/
 *.log
 log.txt
 
-
 /.sourcemaps
 /.versions
 /coverage
@@ -43,7 +42,6 @@ yarn-error.log
 .settings/
 *.sublime-project
 *.sublime-workspace
-android
 
 # Visual Studio Code
 .vscode/*
@@ -52,7 +50,6 @@ android
 !.vscode/launch.json
 !.vscode/extensions.json
 .history/*
-
 
 # Miscellaneous
 /.angular

@@ -1,0 +1,57 @@
+<div [@slideIn]>
+  <h1 class="ion-text-center">
+    <strong class="brand-title">
+      <ion-icon name="heart-circle"></ion-icon>
+      FritangApp
+      <ion-icon name="heart-circle"></ion-icon>
+    </strong>
+  </h1>
+
+  <h2 class="ion-text-center">
+    <strong>Inicio de sesión</strong>
+  </h2>
+  <form>
+    <ion-input
+      labelPlacement="stacked"
+      clearInput="true"
+      class="ion-margin-top"
+      label="Nombre de usuario o correo"
+      fill="outline"
+      value="fonse99"
+    >
+      <ion-icon name="person" slot="start" color="primary"
+    /></ion-input>
+
+    <ion-input
+      clearInput="true"
+      labelPlacement="stacked"
+      class="ion-margin-top"
+      type="password"
+      label="contraseña"
+      value="NeverGonnaGiveYouUp"
+      fill="outline"
+    >
+      <ion-icon name="key" slot="start" color="primary" />
+      <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+    </ion-input>
+
+    <ion-button
+      class="ion-margin-top"
+      expand="block"
+      size="large"
+      (click)="onLogin()"
+    >
+      <ion-icon name="log-in-outline" slot="start"></ion-icon>
+      Iniciar Sesión
+    </ion-button>
+    <ion-button
+      class="ion-margin-top"
+      expand="block"
+      fill="clear"
+      (click)="onPassRecovery()"
+    >
+      <ion-icon name="reload-circle-outline" slot="start"></ion-icon>
+      Recuperar contraseña
+    </ion-button>
+  </form>
+</div>

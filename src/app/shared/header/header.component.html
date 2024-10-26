@@ -5,10 +5,69 @@
         <strong>
           <ion-icon [name]="icon" />
           {{ title }}
+          <ion-icon [name]="icon" />
         </strong>
       </h1>
     </ion-title>
 
-    <ion-icon class="ion-margin" name="person-circle" size="large" slot="end" />
+    <ion-item slot="end" color="primary" lines="none">
+      <ion-label slot="end" class="profile-name">
+        <ion-title class="ion-padding-end">
+          <strong> <p>Brandon Fonseca</p> </strong>
+        </ion-title>
+      </ion-label>
+
+      <ion-avatar id="popover-button" slot="end" class="profile">
+        <img
+          src="https://png.pngtree.com/thumb_back/fh260/background/20230612/pngtree-in-the-style-of-2d-game-art-image_2884743.jpg"
+          alt="profile"
+        />
+      </ion-avatar>
+    </ion-item>
   </ion-toolbar>
 </ion-header>
+
+<ion-popover
+  #profileMenu
+  dismissOnSelect
+  trigger="popover-button"
+  [showBackdrop]="false"
+>
+  <ng-template>
+    <ion-header class="ion-no-border">
+      <ion-card class="no-margin" style="box-shadow: none">
+        <img
+          src="https://png.pngtree.com/thumb_back/fh260/background/20230612/pngtree-in-the-style-of-2d-game-art-image_2884743.jpg"
+          alt="profile"
+        />
+        <ion-item lines="none">
+          <ion-label class="ion-text-nowrap">
+            Brandon Isaac Fonseca
+            <p>{{ "isaac99.bf@gmail.com" }}</p>
+            <ion-badge> Administrador </ion-badge>
+          </ion-label>
+        </ion-item>
+      </ion-card>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-item-divider>Opciones</ion-item-divider>
+        <ion-item
+          *ngFor="let menuItem of menuItems"
+          (click)="menuItem.action()"
+          lines="full"
+          button
+          [detail]="false"
+        >
+          <ion-icon [name]="menuItem.icon" slot="start" />
+          {{ menuItem.label }}
+        </ion-item>
+      </ion-list>
+    </ion-content>
+    <ion-footer>
+      <ion-item [button]="true" (click)="logout()" color="secondary">
+        <ion-icon name="power-outline" slot="start"></ion-icon> Cerrar Sesión
+      </ion-item>
+    </ion-footer>
+  </ng-template>
+</ion-popover>

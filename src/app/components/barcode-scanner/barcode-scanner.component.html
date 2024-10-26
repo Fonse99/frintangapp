@@ -1,0 +1,18 @@
+<div class="scanner-container">
+  <h1>Escáner de Códigos de Barras</h1>
+
+  <!-- Botón para iniciar el escaneo -->
+  <button *ngIf="!isScanning" (click)="startScan()" ion-button color="primary">
+    Iniciar Escaneo
+  </button>
+
+  <!-- Indicador de que se está escaneando -->
+  <div *ngIf="isScanning">
+    <h3>Escaneando...</h3>
+  </div>
+
+  <!-- Mostrar el resultado escaneado -->
+  <div *ngIf="scannedResult">
+    <h2>Resultado: {{ scannedResult }}</h2>
+  </div>
+</div>

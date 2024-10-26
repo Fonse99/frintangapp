@@ -8,6 +8,10 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
+    path: 'auth',
+    loadChildren: () => import('./auth/auth.module').then( m => m.AuthPageModule)
+  },
+  {
     path: 'home',
     loadChildren: () =>
       import('./modules/home/home.module').then((m) => m.HomePageModule),
@@ -23,6 +27,10 @@ const routes: Routes = [
   {
     path: 'orders',
     loadChildren: () => import('./modules/orders/orders.module').then( m => m.OrdersPageModule)
+  },
+  {
+    path: 'billing',
+    loadChildren: () => import('./modules/billing/billing.module').then( m => m.BillingPageModule)
   },
 ];
 
