@@ -1,5 +1,6 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { IonModal } from '@ionic/angular';
+import { Component, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { IonModal, IonPopover, PopoverController } from '@ionic/angular';
+import { FilterComponent } from './components/filter/filter.component';
 
 @Component({
   selector: 'p-pos',
@@ -8,6 +9,8 @@ import { IonModal } from '@ionic/angular';
 })
 export class PosPage implements OnInit, OnDestroy {
   @ViewChild('modal') modal!: IonModal;
+  popover = inject(PopoverController);
+
   plates = MOCK_PLATILLOS;
 
   constructor() {}
@@ -19,6 +22,22 @@ export class PosPage implements OnInit, OnDestroy {
 
   goBack() {
     history.back();
+  }
+
+  async openFilterPopover(e: Event) {
+    const filterPopover = await this.popover.create({
+      component: FilterComponent,
+    });
+
+    filterPopover.present(e as MouseEvent);
+
+    const { data } = await filterPopover.onDidDismiss();
+
+    console.log(data);
+  }
+
+  async openInvoice() {
+    await this.modal.present();
   }
 }
 

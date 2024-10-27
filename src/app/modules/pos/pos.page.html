@@ -1,32 +1,41 @@
 <!-- <c-header title="Punto de venta" icon="storefront" /> -->
 
-<ion-toolbar class="sticky">
-  <ion-button
-    class="ion-margin-start"
-    fill="clear"
-    slot="start"
-    (click)="goBack()"
-  >
-    <ion-icon name="chevron-back" />
-    Volver
-  </ion-button>
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-button
+      class="ion-margin-start"
+      fill="clear"
+      slot="start"
+      (click)="goBack()"
+    >
+      <ion-icon name="chevron-back" />
+      Volver
+    </ion-button>
 
-  <ion-searchbar
-    slot="start"
-    class="m-40 ion-margin-top ion-margin-bottom"
-    placeholder="Buscar platillo"
-  />
+    <ion-item id="searchbar-two" lines="none">
+      <ion-searchbar />
 
-  <div slot="end" class="ion-padding-start">
-    <ion-icon
-      class="ion-margin-end"
-      name="person-circle"
-      color="primary"
-      size="large"
-    />
-  </div>
-</ion-toolbar>
+      <ion-button fill="solid" (click)="openFilterPopover($event)">
+        <ion-icon name="filter-outline" size="large"></ion-icon>
+      </ion-button>
+    </ion-item>
+    <div slot="end" class="ion-padding-start">
+      <ion-icon
+        class="ion-margin-end"
+        name="person-circle"
+        color="primary"
+        size="large"
+      />
+    </div>
+  </ion-toolbar>
+  <ion-item id="searchbar-one" class="m-auto" lines="none">
+    <ion-searchbar />
 
+    <ion-button fill="solid" (click)="openFilterPopover($event)">
+      <ion-icon name="filter-outline" size="large"></ion-icon>
+    </ion-button>
+  </ion-item>
+</ion-header>
 <ion-content [fullscreen]="true">
   <ion-grid class="ion-margin">
     <ion-row>
@@ -42,7 +51,7 @@
           <img class="picture" src="{{i.image}}" alt="taco en salsa ranch" />
           <ion-card-header>
             <ion-card-title> {{i.name}} </ion-card-title>
-            <ion-toolbar>
+            <ion-item>
               <ion-label slot="start">
                 <p>Disponibles</p>
                 <ion-text> {{i.stock}} </ion-text>
@@ -51,7 +60,7 @@
                 <p>Precio</p>
                 <strong>{{i.stock| currency: "C$ "}}</strong>
               </ion-label>
-            </ion-toolbar>
+            </ion-item>
           </ion-card-header>
 
           <ion-footer class="ion-no-border">
@@ -86,28 +95,39 @@
 </ion-content>
 
 <ion-footer>
-  <ion-toolbar class="ion-padding-bottom">
-    <ion-item>
-      <ion-label>
-        <p>Total</p>
-        <ion-text>{{ 250.00 | currency:"C$ "}}</ion-text>
-      </ion-label>
-    </ion-item>
-
-    <ion-button id="bill-button" slot="end" fill="outline" size="large">
+  <ion-toolbar
+    class="ion-padding-bottom ion-padding-start ion-padding-end tool-summary"
+  >
+    <ion-button
+      class="small-button"
+      slot="end"
+      size="large"
+      (click)="openInvoice()"
+    >
       <ion-icon slot="start" name="newspaper"></ion-icon>
-
       Factura
-      <ion-badge class="ion-margin-start" slot="end" color="success"
-        >12</ion-badge
-      >
+      <ion-badge class="ion-margin-start" slot="end" color="warning">
+        12
+      </ion-badge>
+    </ion-button>
+
+    <ion-button
+      class="full-button"
+      expand="block"
+      size="large"
+      (click)="openInvoice()"
+    >
+      <ion-icon slot="start" name="newspaper"></ion-icon>
+      Factura
+      <ion-badge class="ion-margin-start" slot="end" color="warning">
+        12
+      </ion-badge>
     </ion-button>
   </ion-toolbar>
 </ion-footer>
 
 <ion-modal
   #modal
-  trigger="bill-button"
   [initialBreakpoint]="1"
   [breakpoints]="[0, 0.25, 0.5, 0.75, 1.0]"
 >
@@ -121,14 +141,17 @@
         <ion-title slot="end">Factura</ion-title>
       </ion-toolbar>
       <ion-toolbar>
-        <ion-title class="ion-text-center"> Consumo </ion-title>
+        <ion-title class="ion-text-start"> Consumo </ion-title>
+        <ion-badge class="ion-margin-end" slot="end"
+          >{{30}} Productos</ion-badge
+        >
       </ion-toolbar>
     </ion-header>
 
     <ion-content>
       <ion-list>
         <ion-item
-          *ngFor="let i of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20, 21,22,23,24,25,26,27,28,29,30]"
+          *ngFor="let i of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30]"
         >
           Elemento número {{i}}
         </ion-item>
@@ -136,20 +159,40 @@
     </ion-content>
     <ion-footer>
       <ion-toolbar>
-        <ion-item>
-          <ion-label>
-            <p>Total</p>
-            <ion-text>{{ 250.00 | currency:"C$ "}}</ion-text>
-          </ion-label>
-          <ion-label>
-            <p>Cant. de productos</p>
-            <ion-text>{{ 30 }} Unidades</ion-text>
-          </ion-label>
-          <ion-label>
-            <p>Descuento</p>
-            <ion-text>{{ 0 | currency: "C$ " }}</ion-text>
-          </ion-label>
-        </ion-item>
+        <ion-accordion-group>
+          <ion-accordion value="total">
+            <ion-item slot="header">
+              <ion-label>
+                <p>Total</p>
+                <ion-text>
+                  <strong> {{11250.00 | currency: "C$ "}} </strong>
+                </ion-text>
+              </ion-label>
+
+              <ion-label slot="end"> <p>Ver detalles</p> </ion-label>
+            </ion-item>
+
+            <ion-item slot="content">
+              <ion-label>
+                <p>Descuento</p>
+                <ion-text>
+                  <strong>{{ 0 | currency: "C$ " }}</strong>
+                </ion-text>
+                <br />
+                <br />
+                <p>Subtotal</p>
+                <ion-text>
+                  <strong> {{ 11250.00 | currency:"C$ "}}</strong>
+                </ion-text>
+                <br />
+                <ion-button fill="clear" expand="block"
+                  >aplicar descuento
+                  <ion-icon name="cut-outline" slot="end"></ion-icon
+                ></ion-button>
+              </ion-label>
+            </ion-item>
+          </ion-accordion>
+        </ion-accordion-group>
       </ion-toolbar>
       <ion-toolbar class="ion-padding-bottom">
         <ion-button
